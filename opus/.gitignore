@@ -4,7 +4,4 @@ gen
 deps/libogg
 deps/opus
 deps/opusfile
-deps/lfi-runtime
-deps/rlbox
-deps/rlbox_lfi_sandbox
 deps/install

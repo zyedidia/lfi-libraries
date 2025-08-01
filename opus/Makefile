@@ -1,7 +1,9 @@
-LFI_CC=x86_64-lfi-linux-musl-clang
-RLBOX_INCLUDE=-Ideps/rlbox/code/include -Ideps/rlbox_lfi_sandbox/include
+DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
+ROOT := $(DIR)/..
+
+include ../common.mk
+
 OPUS_INCLUDE=-Ideps/install/include -Ideps/install/include/opus
-LIBLFI=deps/install/lib/liblfi.a
 
 opusplay: opusplay.c gen/lib_trampolines.S gen/lib_init.c
 	$(CC) $^ -O2 -o $@ $(OPUS_INCLUDE) -Igen $(LIBLFI) -lportaudio
@@ -15,7 +17,7 @@ libopusfile.lfi: deps/install/lib/libopusfile.a deps/install/lib/libopus.a deps/
 
 gen/lib_trampolines.S gen/lib_init.c &: libopusfile.lfi libopusfile.symbols
 	mkdir -p gen
-	lfi-bind -no-verify -gen-trampolines gen/lib_trampolines.S -gen-init gen/lib_init.c -lib opusfile_box -symbols-file libopusfile.symbols $<
+	$(LFI_BIND) -no-verify -gen-trampolines gen/lib_trampolines.S -gen-init gen/lib_init.c -lib opusfile_box -symbols-file libopusfile.symbols $<
 
 clean:
 	rm -f libopusfile.lfi opusplay

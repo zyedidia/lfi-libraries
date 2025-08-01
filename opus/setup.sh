@@ -1,5 +1,8 @@
 set -ex
 
+mkdir -p deps
+cd deps
+
 if [ ! -d opusfile ]; then
     wget https://downloads.xiph.org/releases/opus/opusfile-0.11.tar.gz
     tar -xf opusfile-0.11.tar.gz
@@ -21,18 +24,6 @@ if [ ! -d libogg ]; then
     mv libogg-1.3.6 libogg
 fi
 
-if [ ! -d lfi-runtime ]; then
-    git clone https://github.com/lfi-project/lfi-runtime
-fi
-
-if [ ! -d rlbox ]; then
-    git clone https://github.com/PLSysSec/rlbox
-fi
-
-if [ ! -d rlbox_lfi_sandbox ]; then
-    git clone https://github.com/PLSysSec/rlbox_lfi_sandbox
-fi
-
 cd opus
 ./configure --prefix=$PWD/../install CC=$LFI_CC --host $ARCH
 make install
@@ -47,9 +38,3 @@ cd opusfile
 ./configure --prefix=$PWD/../install CC=$LFI_CC --host $ARCH PKG_CONFIG_PATH="$PWD/../install/lib/pkgconfig" --disable-http
 make install
 cd ..
-
-cd lfi-runtime
-meson setup build --libdir=lib --prefix=$PWD/../install
-cd build
-ninja install
-cd ../..
