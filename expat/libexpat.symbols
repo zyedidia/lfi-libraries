@@ -1,0 +1,9 @@
+XML_ParserCreate
+XML_ParserFree
+XML_SetElementHandler
+XML_SetUserData
+XML_ParseBuffer
+XML_GetBuffer
+XML_GetCurrentLineNumber
+XML_ErrorString
+XML_GetErrorCode

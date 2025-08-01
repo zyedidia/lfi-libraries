@@ -4,13 +4,12 @@ This example uses PortAudio to play an Opus file that is decoded with a
 sandboxed Opus decoder. Before continuing, install PortAudio: `apt install
 portaudio19-dev`.
 
-Download and build all dependencies (`libopus`, `libogg`, `libopusfile`, `liblfi`):
+Download and build all dependencies (`libopus`, `libogg`, `libopusfile`):
 
 ```
 export LFI_CC=...
 export ARCH=...
 
-cd deps
 ./setup.sh
 ```
 
@@ -27,4 +26,5 @@ Run:
 ```
 
 The current version (`opusplay.c`) uses `lfi-bind` to call sandboxed functions.
-A future version using RLBox is in-progress.
+
+See `opusplay_rlbox.c` for a version that uses RLBox instead.
