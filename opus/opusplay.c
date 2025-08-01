@@ -36,10 +36,15 @@ int main(int argc, char **argv) {
 
     fseek(f, 0L, SEEK_END);
     size_t length = ftell(f);
+    fseek(f, 0L, SEEK_SET);
 
-    void *box_buf = opusfile_box_mmap(NULL, length, LFI_PROT_READ, LFI_MAP_PRIVATE, fileno(f), 0);
-    if (box_buf == (void *) -1)
-        ERROR("error: opusfile_box_mmap\n");
+    void *box_buf = opusfile_box_malloc(length);
+    if (!box_buf)
+        ERROR("error: opusfile_box_malloc\n");
+
+    size_t n = fread(box_buf, length, 1, f);
+    if (n != 1)
+        ERROR("error: fread");
 
     fclose(f);
 
@@ -55,7 +60,7 @@ int main(int argc, char **argv) {
     }
 
     opusfile_box_free(pcmdata);
-    opusfile_box_munmap(box_buf, length);
+    opusfile_box_free(box_buf);
 
     Pa_StopStream(stream);
     Pa_CloseStream(stream);

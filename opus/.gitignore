@@ -1,5 +1,6 @@
 libopusfile.lfi
 opusplay
+opusplay_rlbox
 gen
 deps/libogg
 deps/opus
