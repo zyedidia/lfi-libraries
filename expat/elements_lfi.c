@@ -42,6 +42,9 @@ static void XMLCALL endElement(void *userData, const XML_Char *name) {
     int *const depthPtr = (int *) userData;
     (void) name;
 
+    if (!lfi_box_ptrvalid(expat_box_box, (lfiptr) depthPtr))
+        ERROR("invalid pointer: %p\n", depthPtr);
+
     *depthPtr -= 1;
 }
 
