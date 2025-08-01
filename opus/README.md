@@ -1,7 +1,8 @@
 # Opus Player Example
 
 This example uses PortAudio to play an Opus file that is decoded with a
-sandboxed Opus decoder.
+sandboxed Opus decoder. Before continuing, install PortAudio: `apt install
+portaudio19-dev`.
 
 Download and build all dependencies (`libopus`, `libogg`, `libopusfile`, `liblfi`):
 
