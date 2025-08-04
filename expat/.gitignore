@@ -2,4 +2,5 @@ deps
 gen
 elements_lfi
 elements_native
+elements_rlbox
 libexpat.lfi

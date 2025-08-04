@@ -67,6 +67,8 @@ int main(void) {
         void *const buf = XML_GetBuffer(parser, BUFSIZ);
         if (!buf)
             ERROR("error: XML_GetBuffer\n");
+        if (!lfi_box_ptrvalid(expat_box_box, (lfiptr) buf))
+            ERROR("invalid pointer: %p\n", buf);
 
         const size_t len = fread(buf, 1, BUFSIZ, stdin);
         if (ferror(stdin))
