@@ -4,8 +4,6 @@
 
 #include "lib.h"
 
-#define RLBOX_SINGLE_THREADED_INVOCATIONS
-
 #include "rlbox.hpp"
 #include "rlbox_lfi_sandbox.hpp"
 

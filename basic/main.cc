@@ -16,7 +16,7 @@ extern "C" {
 
 RLBOX_DEFINE_BASE_TYPES_FOR(lib, lfi);
 
-int main(int argc, char const *argv[]) {
+int main() {
     rlbox_sandbox_lib sandbox;
     sandbox.create_sandbox(lib_start, lib_end);
 
